@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain MRI Anomaly Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="{{ url_for('home') }}" class="brand">
+                <span class="brand-mark"></span>
+                <span class="brand-text">Brain MRI</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">
+                    Home
+                </a>
+
+                <a href="{{ url_for('detect') }}" class="nav-link {% if request.endpoint == 'detect' %}active{% endif %}">
+                    Detect
+                </a>
+
+                <a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">
+                    About
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

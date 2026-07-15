@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<main class="page-shell">
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <p class="eyebrow">Generating Medical Imaging Platform</p>
+
+            <h1>
+                Brain MRI <br>
+                Anomaly Detection
+            </h1>
+
+            <p class="hero-description">
+                Programm intro
+            </p>
+
+            <div class="hero-actions">
+                <a href="{{ url_for('detect') }}" class="primary-btn">
+                    Start Detection
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+                <img src="{{ url_for('static',filename='image/image1.png')}}" alt="Image" class="large-placeholder">
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="feature-section">
+        <div class="feature-visual">
+            <div class="image-placeholder feature-placeholder">
+                <div class="placeholder-glow"></div>
+                <p>Feature Image Area</p>
+                <span>这里可以放 MRI / 脑部线稿 / 检测示意图</span>
+            </div>
+        </div>
+
+        <div class="feature-content">
+            <p class="eyebrow">Platform Highlights</p>
+
+            <h2>功能亮点</h2>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-number">01</span>
+                    <div>
+                        <h3>function1</h3>
+                        <p>支持脑部 MRI 数据上传与自动化异常检测流程。</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-number">02</span>
+                    <div>
+                        <h3>2</h3>
+                        <p>生成原始图像与异常热力图的可视化对比。</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-number">03</span>
+                    <div>
+                        <h3>3</h3>
+                        <p>支持结果图像、分析摘要和报告文件下载。</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-number">04</span>
+                    <div>
+                        <h3>4</h3>
+                        <p>模型接口独立，后续可直接接入真实 AI 推理服务。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

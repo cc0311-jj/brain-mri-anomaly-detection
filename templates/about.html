@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="page-shell">
+
+    <section class="about-section">
+        <div class="about-card">
+            <p class="eyebrow">About This Platform</p>
+
+            <h1>Brain MRI Anomaly Detection Platform</h1>
+
+            <p>
+                This platform is designed for brain MRI anomaly detection visualization.
+                Users can upload MRI data, run an AI-assisted detection workflow, and view
+                the original image and generated anomaly result side by side.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-item">
+                    <h3>Input</h3>
+                    <p>
+                        Brain MRI data such as image files, NIfTI files, DICOM files, or compressed MRI datasets.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h3>Output</h3>
+                    <p>
+                        Original MRI preview, AI-generated anomaly visualization, abnormality score, and downloadable result files.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h3>Model Integration</h3>
+                    <p>
+                        The current website is prepared for model connection. The detection model can be integrated later through a Python function or an external API.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h3>Disclaimer</h3>
+                    <p>
+                        This platform is for research and demonstration purposes only and is not intended for clinical diagnosis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

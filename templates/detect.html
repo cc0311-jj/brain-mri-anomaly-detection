@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="detect-shell">
+
+    <section class="detect-header">
+        <div>
+            <p class="eyebrow">Detection Workspace</p>
+            <h1>Brain MRI Anomaly Detection</h1>
+            <p>
+                Upload brain MRI data, preview the original image, and view generated anomaly visualization results.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="detect-grid">
+
+        <aside class="panel upload-panel">
+            <div class="panel-header">
+                <p class="panel-kicker">Step 01</p>
+                <h2>Upload Data</h2>
+            </div>
+
+            <form id="uploadForm" class="upload-form">
+                <label for="caseId">Case ID</label>
+                <input 
+                    type="text" 
+                    id="caseId" 
+                    name="caseId" 
+                    placeholder="CASE-001"
+                >
+
+                <label for="modality">MRI Modality</label>
+                <select id="modality" name="modality">
+                    <option value="T1">T1</option>
+                    <option value="T2">T2</option>
+                    <option value="FLAIR">FLAIR</option>
+                    <option value="DWI">DWI</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="mriFile">MRI File</label>
+
+                <div class="drop-zone" id="dropZone">
+                    <input 
+                        type="file" 
+                        id="mriFile" 
+                        name="mriFile"
+                        accept=".png,.jpg,.jpeg,.nii,.nii.gz,.dcm,.zip"
+                    >
+
+                    <div class="drop-zone-content">
+                        <div class="upload-icon">＋</div>
+                        <h3>Upload MRI Data</h3>
+                        <p>Drag your file here or click to browse</p>
+                        <span>.png .jpg .nii .nii.gz .dcm .zip</span>
+                    </div>
+                </div>
+
+                <div class="file-card" id="fileCard">
+                    <p class="file-name" id="fileName">No file selected</p>
+                    <p class="file-meta" id="fileMeta">Waiting for upload</p>
+                </div>
+
+                <label for="notes">Notes</label>
+                <textarea 
+                    id="notes" 
+                    name="notes" 
+                    rows="4" 
+                    placeholder="Add optional case notes here..."
+                ></textarea>
+
+                <div class="upload-actions">
+                    <button type="button" class="secondary-btn" id="clearBtn">
+                        Clear
+                    </button>
+
+                    <button type="button" class="primary-btn full-btn" id="runBtn">
+                        Run Detection
+                    </button>
+                </div>
+            </form>
+        </aside>
+
+
+        <section class="panel viewer-panel">
+            <div class="panel-header viewer-title">
+                <div>
+                    <p class="panel-kicker">Step 02</p>
+                    <h2>Generated Image</h2>
+                </div>
+
+                <div class="status-pill" id="statusPill">
+                    Status: Waiting
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="image-card">
+                    <div class="image-card-header">
+                        <span>Original MRI</span>
+                    </div>
+
+                    <div class="image-stage" id="originalStage">
+                        <img id="originalPreview" alt="Original MRI Preview">
+                        <div class="empty-state" id="originalEmpty">
+                            <p>Original image preview</p>
+                            <span>上传图像后显示在这里</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-card-header">
+                        <span>AI Detection Result</span>
+                    </div>
+
+                    <div class="image-stage" id="resultStage">
+                        <img id="resultPreview" alt="Generated Detection Result">
+                        <div class="heatmap-layer" id="heatmapLayer"></div>
+
+                        <div class="empty-state" id="resultEmpty">
+                            <p>Generated anomaly image</p>
+                            <span>点击 Run Detection 后显示结果</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-card">
+                <div class="slider-top">
+                    <label for="opacitySlider">Overlay Opacity</label>
+                    <span id="opacityValue">65%</span>
+                </div>
+
+                <input 
+                    type="range" 
+                    id="opacitySlider" 
+                    min="0" 
+                    max="100" 
+                    value="65"
+                >
+            </div>
+
+            <div class="process-row">
+                <div class="process-item" id="processUpload">Upload</div>
+                <div class="process-line"></div>
+                <div class="process-item" id="processPreprocess">Preprocess</div>
+                <div class="process-line"></div>
+                <div class="process-item" id="processModel">Model</div>
+                <div class="process-line"></div>
+                <div class="process-item" id="processDone">Completed</div>
+            </div>
+        </section>
+
+
+        <aside class="panel result-panel">
+            <div class="panel-header">
+                <p class="panel-kicker">Step 03</p>
+                <h2>Result</h2>
+            </div>
+
+            <div class="score-box">
+                <p>Abnormality Score</p>
+                <h3 id="scoreValue">--</h3>
+                <span id="scoreLabel">Waiting for analysis</span>
+            </div>
+
+            <div class="result-analysis">
+                <h3>Result Analysis</h3>
+
+                <div class="analysis-item">
+                    <span></span>
+                    <p id="analysisTextOne">
+                        检测完成后，这里显示结果分析摘要。
+                    </p>
+                </div>
+
+                <div class="analysis-item">
+                    <span></span>
+                    <p id="analysisTextTwo">
+                        可以说明异常区域位置、模型置信度或图像质量提示。
+                    </p>
+                </div>
+
+                <div class="analysis-item">
+                    <span></span>
+                    <p id="analysisTextThree">
+                        本平台仅用于科研与演示，不作为临床诊断依据。
+                    </p>
+                </div>
+            </div>
+
+            <div class="download-box">
+                <h3>Download</h3>
+
+                <button type="button" class="download-btn" id="downloadImageBtn">
+                    Download Result Image
+                </button>
+
+                <button type="button" class="download-btn" id="downloadReportBtn">
+                    Download Analysis File
+                </button>
+
+                <button type="button" class="download-btn" id="downloadOriginalBtn">
+                    Download Uploaded File
+                </button>
+            </div>
+
+            <div class="notice-box">
+                <h3>Notice</h3>
+                <p>
+                    Please remove personal identifiers before uploading medical data.
+                    The current page is prepared for model integration.
+                </p>
+            </div>
+        </aside>
+
+    </section>
+
+</main>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/detect.js') }}"></script>
+{% endblock %}
