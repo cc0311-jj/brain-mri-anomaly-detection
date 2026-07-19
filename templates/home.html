@@ -7,27 +7,21 @@
 
     <section class="hero-section">
         <div class="hero-content">
-            <p class="eyebrow">Generating Medical Imaging Platform</p>
+            <p class="eyebrow hero-reveal hero-reveal-1">Generative Medical Imaging Platform</p>
 
-            <h1>
-                Brain MRI <br>
-                Anomaly Detection
+            <h1 aria-label="Brain MRI Anomaly Detection">
+                <span class="hero-line hero-reveal hero-reveal-2">Brain MRI</span>
+                <span class="hero-line hero-reveal hero-reveal-3">Anomaly Detection</span>
             </h1>
 
-            <p class="hero-description">
-                Programm intro
+            <p class="hero-description hero-reveal hero-reveal-4">
+                Built on the Diffusion Model, this system detects anomalies from brain MRI scans and generates intuitive visual analysis results for medical usage.
             </p>
 
-            <div class="hero-actions">
+            <div class="hero-actions hero-reveal hero-reveal-5">
                 <a href="{{ url_for('detect') }}" class="primary-btn">
                     Start Detection
                 </a>
-            </div>
-        </div>
-
-        <div class="hero-visual">
-                <img src="{{ url_for('static',filename='image/image1.png')}}" alt="Image" class="large-placeholder">
-
             </div>
         </div>
     </section>
@@ -75,6 +69,58 @@
             </div>
         </div>
     </section>
+    <section class="workflow-section">
+        <div class="workflow-container">
+            <div class="workflow-left workflow-reveal">
+                <p class="eyebrow">Detection Workflow</p>
+                <h2>How It Works</h2>
+                <p>Simple three-step operation process</p>
+            </div>
+            <div class="workflow-right">
+                <div class="timeline-item workflow-reveal">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-text">Upload brain MRI image</div>
+                </div>
+                <div class="timeline-item workflow-reveal">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-text">Detect anomalies via Diffusion Model</div>
+                </div>
+                <div class="timeline-item workflow-reveal">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-text">View visualized detection report</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantage-section">
+        <div class="advantage-orbit">
+            <div class="advantage-heading advantage-reveal">
+                <p class="eyebrow">Why Choose This Platform</p>
+                <h2>Our Advantage</h2>
+            </div>
+            <article class="advantage-card advantage-card-1 advantage-reveal">
+                <h3>Lightweight Web Experience</h3>
+            </article>
+            <article class="advantage-card advantage-card-2 advantage-reveal">
+                <h3>No Local Configuration</h3>
+            </article>
+            <article class="advantage-card advantage-card-3 advantage-reveal">
+                <h3>Visualized Results</h3>
+            </article>
+            <article class="advantage-card advantage-card-4 advantage-reveal">
+                <h3>Generative Diffusion Framework</h3>
+            </article>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-text">
+            <p>Brain MRI Anomaly Detection System | Based on Diffusion Model</p>
+            <p>Academic Graduation Project — All medical images are for research use only</p>
+            <p>© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
 
 </main>
 
@@ -94,5 +140,18 @@
 
         featureObserver.observe(featureSection);
     }
+
+    const revealSections = document.querySelectorAll('.workflow-section, .advantage-section');
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    revealSections.forEach((section) => revealObserver.observe(section));
 </script>
 {% endblock %}
