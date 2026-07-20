@@ -24,6 +24,21 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Home uses one viewport (minus the sticky navigation) per content section. */
+.home-page {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 76px;
+}
+
+.home-page .page-shell > section {
+    height: calc(100vh - 76px);
+    height: calc(100svh - 76px);
+    min-height: calc(100vh - 76px);
+    min-height: calc(100svh - 76px);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -314,6 +329,8 @@ textarea {
 
 .feature-section {
     padding: 100px 0 120px;
+    display: flex;
+    align-items: center;
 }
 
 .feature-content {
@@ -891,6 +908,8 @@ textarea {
 .workflow-section {
     padding: 110px 0;
     border-top: 1px solid var(--color-cyan);
+    display: flex;
+    align-items: center;
 }
 
 .workflow-container {
@@ -923,14 +942,18 @@ textarea {
 .workflow-right {
     position: relative;
     padding-left: 58px;
+    min-height: clamp(320px, 42vh, 410px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .workflow-right::before {
     content: "";
     position: absolute;
     left: 21px;
-    top: 23px;
-    bottom: 23px;
+    top: 36px;
+    bottom: 36px;
     width: 2px;
     background: var(--color-border);
     transform: scaleY(0);
@@ -944,8 +967,8 @@ textarea {
 
 .timeline-item {
     position: relative;
-    min-height: 46px;
-    margin-bottom: 44px;
+    min-height: 72px;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
 }
@@ -962,6 +985,8 @@ textarea {
     font-weight: 800;
     position: absolute;
     left: -58px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 2;
     box-shadow: 0 8px 20px rgba(52, 122, 165, 0.2);
 }
@@ -1083,6 +1108,7 @@ textarea {
     background: var(--color-ink);
     color: rgba(248, 251, 252, 0.76);
     border-top: 1px solid rgba(184, 209, 221, 0.28);
+    scroll-snap-align: start;
 }
 
 .footer-text {
@@ -1127,6 +1153,10 @@ textarea {
         grid-template-columns: 1fr;
         gap: 38px;
         padding: 52px 0;
+    }
+
+    .home-page .page-shell > section {
+        overflow-y: auto;
     }
 
     .hero-section {
@@ -1228,6 +1258,10 @@ textarea {
 
     .workflow-section {
         padding: 76px 0;
+    }
+
+    .workflow-right {
+        min-height: 300px;
     }
 
     .advantage-orbit {
