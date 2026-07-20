@@ -123,9 +123,9 @@ function setWaitingState() {
     scoreValue.textContent = "--";
     scoreLabel.textContent = "Waiting for analysis";
 
-    analysisTextOne.textContent = "检测完成后，这里显示结果分析摘要。";
-    analysisTextTwo.textContent = "可以说明异常区域位置、模型置信度或图像质量提示。";
-    analysisTextThree.textContent = "本平台仅用于科研与演示，不作为临床诊断依据。";
+    analysisTextOne.textContent = "Detection summaries will be shown here once analysis completes.";
+    analysisTextTwo.textContent = "Displays abnormal regions, model confidence and image quality feedback.";
+    analysisTextThree.textContent = "For research demonstration only; not valid for clinical diagnosis.";
 
     resetProcess();
     resetResultLinks();
